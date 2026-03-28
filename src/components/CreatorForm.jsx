@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { supabase } from "../client";
 
-const CreatorForm = () => {
+const CreatorForm = ({ id }) => {
   const [creator, setCreator] = useState({
     name: "",
     description: "",
     url: "",
     imageURL: "",
   });
+
+  useEffect(() => {
+    const fetchCreators = async () => {
+      const { data, error } = await supabase.from("creators").select("*");
+      const creatorFound = data.find((creator) => creator.id == id);
+      if (error) {
+        console.log(error);
+      } else {
+        setCreator(creatorFound);
+      }
+    };
+    fetchCreators();
+  }, []);
 
   function resetForm() {
     setCreator({
@@ -20,16 +33,34 @@ const CreatorForm = () => {
 
   const submit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase
-      .from("creators")
-      .insert([creator])
-      .single();
-    if (error) {
-      alert("Failed to add creator")
+    if (id) {
+        const { data, error } = await supabase
+        .from("creators")
+        .update({name: creator.name, description: creator.description, url: creator.url, imageURL: creator.imageURL})
+        .eq("id", id)
+        .single();
+      if (error) {
+        alert("Failed to update creator");
+        console.log(error)
+        return
+      } else {
+        alert("Successfully updated creator");
+        window.location.reload()
+      }
     } else {
-      alert("Successfully added a creator")
+      const { data, error } = await supabase
+        .from("creators")
+        .insert([creator])
+        .single();
+      if (error) {
+        alert("Failed to add creator");
+        console.log(error)
+        return
+      } else {
+        alert("Successfully added a creator");
+      }
+      resetForm();
     }
-    resetForm();
   };
   return (
     <main>
