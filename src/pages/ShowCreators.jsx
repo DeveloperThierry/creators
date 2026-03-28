@@ -18,7 +18,14 @@ const ShowCreators = () => {
     fetchCreators();
   }, []);
 
-  const onDelete = async (id) => {};
+  const onDelete = async (id) => {
+    const {data, error} = await supabase.from('creators').delete().eq("id", id)
+    if(error){alert("Error. Creator has not been removed"); console.log(error)}
+    else{
+        alert("Creator has been removed")
+        setCreators(creators.filter(creator => creator.id != id))
+    }
+  };
   const onEdit = async (id) => {};
   const onView = async (id) => {};
 

@@ -19,7 +19,7 @@ const CreatorForm = ({ id }) => {
         setCreator(creatorFound);
       }
     };
-    fetchCreators();
+    if(id){fetchCreators()};
   }, []);
 
   function resetForm() {

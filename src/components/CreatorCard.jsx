@@ -15,7 +15,7 @@ const CreatorCard = ({creator, onDelete, onEdit, onView}) => {
         <footer role="group" className="grid">
           <button>View</button>
           <button>Edit</button>
-          <button>Trash</button>
+          <button onClick={() => onDelete(id)}>Trash</button>
         </footer>
       </article>
     </div>
