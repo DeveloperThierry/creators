@@ -1,8 +1,8 @@
 import React from 'react'
-
+import CreatorForm from '../components/CreatorForm'
 const AddCreator = () => {
   return (
-    <div>AddCreator</div>
+    <CreatorForm/>
   )
 }
 

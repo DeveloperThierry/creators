@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import CreatorForm from "../components/CreatorForm";
 
 const EditCreator = () => {
   return (
-    <div>EditCreator</div>
-  )
-}
+    <CreatorForm/>
+  );
+};
 
-export default EditCreator
+export default EditCreator;
