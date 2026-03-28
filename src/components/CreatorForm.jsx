@@ -45,7 +45,6 @@ const CreatorForm = ({ id }) => {
         return
       } else {
         alert("Successfully updated creator");
-        window.location.reload()
       }
     } else {
       const { data, error } = await supabase

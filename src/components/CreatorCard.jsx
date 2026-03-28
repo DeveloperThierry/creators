@@ -13,8 +13,8 @@ const CreatorCard = ({creator, onDelete, onEdit, onView}) => {
         </Link>
         <p>{description}</p>
         <footer role="group" className="grid">
-          <button>View</button>
-          <button>Edit</button>
+          <button onClick={() => onView(id)}>View</button>
+          <button onClick={() => onEdit(id)}>Edit</button>
           <button onClick={() => onDelete(id)}>Trash</button>
         </footer>
       </article>
