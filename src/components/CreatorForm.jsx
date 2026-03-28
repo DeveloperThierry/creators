@@ -1,29 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
+import { supabase } from "../client";
 
 const CreatorForm = () => {
+  const [creator, setCreator] = useState({
+    name: "",
+    description: "",
+    url: "",
+    imageURL: "",
+  });
+
+  function resetForm() {
+    setCreator({
+      name: "",
+      description: "",
+      url: "",
+      imageURL: "",
+    });
+  }
+
+  const submit = async (e) => {
+    e.preventDefault();
+    const { data, error } = await supabase
+      .from("creators")
+      .insert([creator])
+      .single();
+    if (error) {
+      alert("Failed to add creator")
+    } else {
+      alert("Successfully added a creator")
+    }
+    resetForm();
+  };
   return (
     <main>
-      <form>
+      <form onSubmit={(e) => submit(e)}>
         <fieldset>
           <label>
             Name
-            <input name="name" placeholder="name" autoComplete="name" />
+            <input
+              name="name"
+              placeholder="name"
+              autoComplete="name"
+              value={creator.name}
+              onChange={(e) => setCreator({ ...creator, name: e.target.value })}
+              required
+            />
           </label>
           <label>
-            description
+            Description
             <textarea
               name="description"
               placeholder="description"
               aria-label="description"
+              required
+              value={creator.description}
+              onChange={(e) =>
+                setCreator({ ...creator, description: e.target.value })
+              }
             ></textarea>
           </label>
           <label>
-            Url
-            <input name="url" placeholder="ur;" autoComplete="url" />
+            URL
+            <input
+              name="url"
+              placeholder="url"
+              autoComplete="url"
+              required
+              value={creator.url}
+              onChange={(e) => setCreator({ ...creator, url: e.target.value })}
+            />
           </label>
           <label>
-            ImageUrl
-            <input name="imageUrl" placeholder="imageUrl" autoComplete="imageUrl" />
+            imageURL
+            <input
+              name="imageURL"
+              placeholder="imageURL"
+              autoComplete="imageURL"
+              required
+              value={creator.imageURL}
+              onChange={(e) =>
+                setCreator({ ...creator, imageURL: e.target.value })
+              }
+            />
           </label>
         </fieldset>
 
