@@ -35,6 +35,11 @@
   }
 
   img {
-    max-width: 3rem;
-    max-height:3rem
+    max-width: 10rem;
+    max-height:10rem
+  }
+
+  nav {
+    padding-left: 2rem;
+    padding-right:2rem;
   }
