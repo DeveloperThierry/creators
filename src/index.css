@@ -28,3 +28,13 @@
     background-color: rgb(0, 0, 0);
     padding: 1rem;
   }
+
+
+  Link {
+    color:white;
+  }
+
+  img {
+    max-width: 3rem;
+    max-height:3rem
+  }
